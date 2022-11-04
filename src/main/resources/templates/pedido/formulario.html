@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{ base :: head}">
+    <title>Novo Pedido</title>
+</head>
+<body>
+<div th:replace="~{base :: logo}"></div>
+
+<div th:replace="~{base :: titulo('Novo Pedido')}"></div>
+<div class="container">
+    <!--NAVBAR-->
+    <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/home">Todos</a>
+            <a class="nav-item nav-link" href="">Aguardando</a>
+            <a class="nav-item nav-link" href="">Aprovado</a>
+            <a class="nav-item nav-link" href="">Entregue</a>
+        </div>
+
+        <a href="/pedido/formulario"><button class="btn btn-outline-dark my-2 my-sm-0" type="">Novo</button></a>
+    </nav>
+
+    <div class="card">
+    <!--/*@thymesVar id="requisicaoNovoPedido" type="br.com.alura.mvc"*/-->
+    <form action="/pedido/novo" method="POST" class="card-body" th:object="${requisicaoNovoPedido}" >
+
+        <div class="form-group">
+            <label> Produto</label>
+            <!--/*@thymesVar id="nome" type="br.com.alura.mvc"*/-->
+            <input th:field="*{nome}" class="form-control" th:errorclass="is-invalid" placeholder="nome do produto"/>
+            <small>Informe o nome do produto</small>
+            <div class= "invalid-feedback" th:errors="*{nome}"></div>
+
+        </div>
+        <div class="form-group">
+            <label> Link do produto</label>
+            <input  th:field="*{urlProduto}" th:errorclass="is-invalid" class="form-control" placeholder="URL Produto"/>
+            <small>Procure em um site o produto que você deseja</small>
+            <div th:errors="*{urlProduto}" class= "invalid-feedback"></div>
+
+        </div>
+
+        <div class="form-group">
+            <label> Imagem do Produto</label>
+            <input th:field="*{urlImg}" th:errorclass="is-invalid" class="form-control" placeholder="URL imagem"/>
+            <small>Insira aqui a url da imagem referente o produto</small>
+            <div th:errors="*{urlImg}" class= "invalid-feedback"></div>
+        </div>
+
+        <div class="form-group">
+            <label> Imagem do Produto</label>
+            <textarea th:field="*{descricao}" th:errorclass="is-invalid" class="form-control" placeholder="Adicione detalhes importantes para ajudar o comprador"> </textarea>
+            <div th:errors="*{descricao}" class= "invalid-feedback"></div>
+        </div>
+
+        <button class="btn btn-primary" type="submit"> Cadastrar </button>
+    </form>
+    </div>
+</div>
+
+
+</body>
+</html>
